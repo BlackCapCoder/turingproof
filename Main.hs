@@ -76,10 +76,11 @@ convert ptr loc (x:xs)
       Inc     -> load ptr : add 1 : store ptr : convert ptr (loc+4) xs
       Dec     -> load ptr : sub 1 : store ptr : convert ptr (loc+4) xs
       Loop ops | q <- convert ptr (loc+3) ops
-              -> load ptr : sub 0 : brzero (loc+length q+8)
+              -> load ptr : sub 0 : brzero (loc+length q+9)
                : q
               ++ load ptr : sub 0 : brzero 0
-               : brzero loc : convert ptr (loc+length q+8) xs
+               : brzero (loc+length q+9) : branch loc
+               : convert ptr (loc+length q+9) xs
 
 -- Allocate 3 bytes at the beginning of the program to use as memory.
 -- Amazingly this is turing-complete with only 3 bytes of memory; it will never use more
