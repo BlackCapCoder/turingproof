@@ -73,8 +73,8 @@ convert ptr loc (x:xs)
   = case x of
       Next    -> convert (ptr+1) loc xs
       Prev    -> convert (ptr-1) loc xs
-      Inc     -> load ptr : add 1 : store ptr : convert ptr (loc+4) xs
-      Dec     -> load ptr : sub 1 : store ptr : convert ptr (loc+4) xs
+      Inc     -> load ptr : add 1 : store ptr : convert ptr (loc+3) xs
+      Dec     -> load ptr : sub 1 : store ptr : convert ptr (loc+3) xs
       Loop ops | q <- convert ptr (loc+3) ops
                , k <- loc+length q+9
               -> load ptr : sub 0 : brzero k
