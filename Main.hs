@@ -76,7 +76,7 @@ convert ptr loc (x:xs)
       Inc     -> load ptr : add 1 : store ptr : convert ptr (loc+3) xs
       Dec     -> load ptr : sub 1 : store ptr : convert ptr (loc+3) xs
       Loop ops | q <- convert ptr (loc+3) ops
-               , k <- loc+length q+9
+               , k <- loc+length q+8
               -> load ptr : sub 0 : brzero k
                : q
               ++ load ptr : sub 0 : brzero 0
