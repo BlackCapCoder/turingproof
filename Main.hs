@@ -65,6 +65,9 @@ toBrainfuck l = parse $ ">>+[-" ++ foldr branch "++<<[->+<]" l ++ ">[-<+>]>]"
         n*=l = [1..n]>>l
 
 -- Convert brainfuck to lecture language
+-- Note that this assumes that the loops are circular
+-- which is guaranteed for the generated code, but
+-- not for generic brainfuck programs.
 convert _ _ [] = []
 convert ptr loc (x:xs)
   = case x of
