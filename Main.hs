@@ -1,3 +1,5 @@
+import Data.Bits
+
 -- This is the language given in the lecture
 data Op = STOP
         | LOAD
@@ -11,8 +13,9 @@ data Op = STOP
         | IN
         | OUT
         | NOP
+        deriving Enum
 
--- Helper functions for readability
+-- Operations have 16 bits for parameters
 stop     = (STOP,   0)
 load   x = (LOAD,   x)
 store  x = (STORE,  x)
@@ -26,11 +29,15 @@ inp      = (IN,     0)
 out      = (OUT,    0)
 nop      = (NOP,    0)
 
+
 -- Brainfuck without IO
 data BF = Inc | Dec | Next | Prev | Loop [BF]
 
 -- Iterated collatz
 type Collatz = [(Integer, Integer, Integer)]
+
+-- Convert a operation to binary
+toBinary (op, adr) = adr + shiftL (fromEnum op) 12
 
 -- Parse a brainfuck program
 parse = fst . parse'
